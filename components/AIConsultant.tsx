@@ -6,7 +6,7 @@ import { ChatMessage } from '../types';
 const AIConsultant: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'assistant', content: "Hi! I'm Alex's AI consultant. Ask me anything about his projects or how his data science skills can help your business." }
+    { role: 'assistant', content: "Hi! I'm Vinay's AI consultant. Ask me anything about his projects or how his data analyst skills can help your business." }
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
