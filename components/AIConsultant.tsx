@@ -38,7 +38,7 @@ const AIConsultant: React.FC = () => {
           <div className="bg-primary p-4 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
               <span className="material-symbols-outlined">smart_toy</span>
-              <span className="font-bold">AI Project Advisor</span>
+              <span className="font-bold">Vinay's AI Assistant</span>
             </div>
             <button onClick={() => setIsOpen(false)} className="hover:opacity-80">
               <span className="material-symbols-outlined">close</span>

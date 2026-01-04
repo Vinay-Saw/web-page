@@ -31,13 +31,14 @@ const Navigation: React.FC = () => {
     ? "text-primary font-black" 
     : "text-slate-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary";
 
-  // Force header background on mobile always to fix scroll artifacts
+  // Use sticky to match Projects page behavior, ensuring header pushes content down
+  // Removed transparency logic to ensure consistent behavior across pages as requested
   const headerBgClass = isScrolled 
     ? 'bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-gray-200 dark:border-gray-800 shadow-sm' 
-    : 'md:bg-transparent md:border-transparent bg-background-light dark:bg-background-dark border-gray-200 dark:border-gray-800 shadow-sm';
+    : 'bg-background-light dark:bg-background-dark border-gray-200 dark:border-gray-800 shadow-sm';
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-[100] w-full h-20 border-b transition-colors duration-300 ${headerBgClass}`}>
+    <header className={`sticky top-0 z-[100] w-full h-20 border-b transition-colors duration-300 ${headerBgClass}`}>
       <div className="container mx-auto max-w-[1200px] px-4 md:px-6">
         <div className="flex h-20 items-center justify-between">
           <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
