@@ -10,8 +10,11 @@ const Navigation: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      // Small threshold to trigger the visual "grounding" of the header
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -31,22 +34,27 @@ const Navigation: React.FC = () => {
     ? "text-primary font-black" 
     : "text-slate-700 dark:text-gray-300 hover:text-primary dark:hover:text-primary";
 
-  // Fixed solid background to prevent transparency artifacts on high-contrast hero sections
-  const headerBgClass = isScrolled 
-    ? 'bg-background-light dark:bg-background-dark border-gray-200 dark:border-gray-800 shadow-md' 
-    : 'bg-background-light dark:bg-background-dark border-transparent';
+  // Using Fixed instead of Sticky for better mobile compatibility
+  // Solid background from the start to prevent transparency flickering on Home hero blurs
+  const headerStyles = isScrolled 
+    ? 'bg-background-light dark:bg-background-dark border-gray-200 dark:border-gray-800 shadow-lg' 
+    : 'bg-background-light dark:bg-background-dark border-transparent shadow-none';
 
   return (
-    <header className={`sticky top-0 z-[100] w-full h-20 border-b transition-all duration-200 ${headerBgClass}`}>
-      <div className="container mx-auto max-w-[1200px] px-4 md:px-6">
-        <div className="flex h-20 items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
-            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white shrink-0 shadow-lg shadow-primary/20">
+    <header className={`fixed top-0 left-0 right-0 z-[100] w-full h-20 border-b transition-all duration-300 ease-in-out ${headerStyles}`}>
+      <div className="container mx-auto max-w-[1200px] h-full px-4 md:px-6">
+        <div className="flex h-full items-center justify-between">
+          {/* Logo Section */}
+          <div className="flex items-center gap-3 cursor-pointer shrink-0" onClick={() => navigate('/')}>
+            <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white shadow-lg shadow-primary/20">
               <span className="material-symbols-outlined text-2xl font-bold">analytics</span>
             </div>
-            <h1 className="text-2xl font-black tracking-tight text-slate-900 dark:text-white truncate">Vinay<span className="text-primary">Saw</span></h1>
+            <h1 className="text-2xl font-black tracking-tighter text-slate-900 dark:text-white">
+              Vinay<span className="text-primary">Saw</span>
+            </h1>
           </div>
           
+          {/* Desktop Nav */}
           <nav className="hidden md:flex flex-1 justify-center gap-10">
             {navItems.map(item => (
               <Link key={item.path} to={item.path} className={`text-base font-semibold transition-colors ${isActive(item.path)}`}>
@@ -55,36 +63,38 @@ const Navigation: React.FC = () => {
             ))}
           </nav>
 
+          {/* Action Buttons */}
           <div className="flex items-center gap-3">
             <button 
               onClick={toggleTheme}
               aria-label="Toggle Theme"
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 dark:bg-gray-800 text-slate-700 dark:text-gray-400 hover:bg-primary hover:text-white transition-all"
+              className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-gray-400 hover:bg-primary hover:text-white transition-all shadow-sm"
             >
-              <span className="material-symbols-outlined text-[22px]">
+              <span className="material-symbols-outlined text-[20px]">
                 {isDark ? 'light_mode' : 'dark_mode'}
               </span>
             </button>
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} 
               aria-label="Toggle Mobile Menu"
-              className="md:hidden flex items-center justify-center p-2 text-slate-700 dark:text-white"
+              className="md:hidden flex h-10 w-10 items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-white"
             >
-              <span className="material-symbols-outlined text-3xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
+              <span className="material-symbols-outlined text-2xl">{isMobileMenuOpen ? 'close' : 'menu'}</span>
             </button>
           </div>
         </div>
       </div>
       
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-gray-800 p-6 flex flex-col gap-6 shadow-2xl animate-in fade-in slide-in-from-top-4">
+      {/* Mobile Sidebar/Menu */}
+      <div className={`md:hidden absolute top-20 left-0 w-full bg-background-light dark:bg-background-dark border-b border-gray-200 dark:border-gray-800 overflow-hidden transition-all duration-300 ease-in-out ${isMobileMenuOpen ? 'max-h-[300px] opacity-100 py-6' : 'max-h-0 opacity-0 py-0'}`}>
+        <div className="flex flex-col gap-6 px-6">
           {navItems.map(item => (
             <Link key={item.path} to={item.path} onClick={() => setIsMobileMenuOpen(false)} className={`text-xl font-bold ${isActive(item.path)}`}>
               {item.label}
             </Link>
           ))}
         </div>
-      )}
+      </div>
     </header>
   );
 };

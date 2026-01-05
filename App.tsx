@@ -27,7 +27,7 @@ const Footer = () => (
       <div className="flex flex-wrap justify-center gap-8 text-sm font-semibold">
         <a href="https://linkedin.com/in/iitianscientist" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
         <a href="mailto:vinaysaw@duck.com" className="hover:text-primary transition-colors">Email</a>
-        <a href="#" className="hover:text-primary transition-colors">GitHub</a>
+        <a href="https://github.com/vinaysaw" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">GitHub</a>
       </div>
       <p className="text-slate-400 text-xs text-center md:text-right">© 2026 Vinay K. Saw. Built with Gemini AI.</p>
     </div>
@@ -40,7 +40,8 @@ const App: React.FC = () => {
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-background-light dark:bg-background-dark selection:bg-primary/20">
         <Navigation />
-        <main className="flex-grow">
+        {/* pt-20 added to offset the fixed header (80px) */}
+        <main className="flex-grow pt-20">
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/projects" element={<ProjectsPage />} />
