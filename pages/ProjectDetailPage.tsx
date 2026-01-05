@@ -21,14 +21,14 @@ const ProjectDetailPage: React.FC = () => {
             <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4 pl-3">Sections</h3>
             <nav className="space-y-1 border-l-2 border-slate-200 dark:border-slate-800">
               <a className="block pl-4 py-2 text-sm border-l-2 border-primary -ml-0.5 text-primary font-medium" href="#overview">Overview</a>
-              <a className="block pl-4 py-2 text-sm border-l-2 border-transparent hover:border-slate-400 text-slate-600 dark:text-slate-400 hover:text-slate-900 transition-colors" href="#methodology">Methodology</a>
+              <a className="block pl-4 py-2 text-sm border-l-2 border-transparent hover:border-slate-400 text-slate-600 dark:text-slate-400 hover:text-slate-900 transition-colors" href="#methodology">Approach</a>
             </nav>
           </div>
           <div className="bg-card-light dark:bg-card-dark rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-            <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Project Details</h4>
+            <h4 className="text-sm font-semibold text-slate-900 dark:text-white mb-4">Project Summary</h4>
             <div className="space-y-4 text-sm">
               <div className="flex justify-between"><span className="text-slate-500">Role</span><span className="font-medium dark:text-slate-200">Data Analyst</span></div>
-              <div className="flex justify-between"><span className="text-slate-500">Timeline</span><span className="font-medium dark:text-slate-200">3 Weeks</span></div>
+              <div className="flex justify-between"><span className="text-slate-500">Industry</span><span className="font-medium dark:text-slate-200">{project.category}</span></div>
               <div className="flex justify-between"><span className="text-slate-500">Status</span><span className="font-medium text-emerald-500">Completed</span></div>
             </div>
             <div className="mt-6 pt-6 border-t border-slate-200 dark:border-slate-700">
@@ -47,16 +47,16 @@ const ProjectDetailPage: React.FC = () => {
         <header className="space-y-6" id="overview">
           <div className="flex flex-wrap gap-3 mb-4">
             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary border border-primary/20 tracking-wider uppercase">{project.category}</span>
-            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 tracking-wider uppercase">Live</span>
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 tracking-wider uppercase">Verified</span>
           </div>
           <h1 className="text-4xl sm:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-tight">{project.title}</h1>
           <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">{project.desc}</p>
           <div className="flex flex-wrap items-center gap-4 pt-4">
             <button className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white text-base font-medium rounded-lg shadow-sm hover:bg-blue-600 transition-all">
-              <i className="fab fa-github mr-2"></i> View Code
+              <span className="material-symbols-outlined mr-2">description</span> Full Report
             </button>
             <button className="inline-flex items-center justify-center px-6 py-3 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 rounded-lg hover:bg-slate-50 transition-all">
-              <span className="material-symbols-outlined mr-2 text-sm">open_in_new</span> Live Demo
+              <span className="material-symbols-outlined mr-2 text-sm">visibility</span> View Dashboard
             </button>
           </div>
         </header>
@@ -77,21 +77,21 @@ const ProjectDetailPage: React.FC = () => {
         
         <section id="content" className="prose dark:prose-invert max-w-none text-slate-600 dark:text-slate-300">
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
-            <span className="w-1.5 h-8 bg-primary rounded-full mr-3"></span> Project Overview
+            <span className="w-1.5 h-8 bg-primary rounded-full mr-3"></span> Project Objective
           </h2>
           <p className="leading-relaxed text-lg mb-8">{project.longDesc}</p>
           
           <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center" id="methodology">
-            <span className="w-1.5 h-8 bg-primary rounded-full mr-3"></span> Methodology
+            <span className="w-1.5 h-8 bg-primary rounded-full mr-3"></span> Analytical Approach
           </h2>
           <div className="space-y-4">
              <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border dark:border-border-dark">
-                <h4 className="font-bold mb-2">1. Exploratory Data Analysis</h4>
-                <p>Performed deep feature analysis to find latent correlations and handle outliers in historical data patterns.</p>
+                <h4 className="font-bold mb-2">1. Data Preparation & Cleaning</h4>
+                <p>Standardized inconsistent ERP data entries and structured large datasets for streamlined reporting. Utilized Advanced Excel for outlier detection and missing value imputation.</p>
              </div>
              <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border dark:border-border-dark">
-                <h4 className="font-bold mb-2">2. Model Development</h4>
-                <p>Tested multiple ensemble architectures including XGBoost and Random Forest, optimizing for both recall and precision.</p>
+                <h4 className="font-bold mb-2">2. Business Logic Integration</h4>
+                <p>Collaborated with stakeholders to define key performance indicators (KPIs) and translated complex business requirements into automated MIS templates.</p>
              </div>
           </div>
         </section>
