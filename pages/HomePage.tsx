@@ -6,7 +6,7 @@ import { portfolio } from '../data/portfolio';
 const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const [isVideoOpen, setIsVideoOpen] = useState(false);
-  const { profile, expertise, stats, projects } = portfolio;
+  const { profile, expertise, stats, projects, education, experience } = portfolio;
 
   const youtubeId = 'dQw4w9WgXcQ'; 
 
@@ -15,6 +15,7 @@ const HomePage: React.FC = () => {
       <div className="px-4 sm:px-6 lg:px-40 flex flex-1 justify-center py-5">
         <div className="layout-content-container flex flex-col max-w-[1200px] flex-1">
           
+          {/* Hero Section */}
           <section className="flex flex-col gap-10 py-10 md:py-16 md:flex-row md:items-center">
             <div className="flex flex-col gap-6 flex-1">
               <div className="flex flex-col gap-4 text-left items-start">
@@ -78,6 +79,7 @@ const HomePage: React.FC = () => {
             </div>
           </section>
 
+          {/* Stats/KPI Section */}
           <div className="py-12 md:py-20">
              <div className="bg-white dark:bg-[#1a2230] rounded-[2.5rem] p-10 md:p-14 border border-slate-200 dark:border-slate-800/50 shadow-xl shadow-slate-200/50 dark:shadow-none">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 text-center">
@@ -91,24 +93,88 @@ const HomePage: React.FC = () => {
              </div>
           </div>
 
-          <section className="py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-            {expertise.map((item, idx) => (
-              <div key={idx} className="bg-white dark:bg-[#1a2230] rounded-2xl p-8 border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center group hover:border-primary transition-all shadow-sm dark:shadow-none">
-                <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 ${
-                  item.color === 'blue' ? 'bg-blue-100 dark:bg-blue-600/20' : 
-                  item.color === 'emerald' ? 'bg-emerald-100 dark:bg-emerald-600/20' : 'bg-orange-100 dark:bg-orange-600/20'
-                }`}>
-                  <span className={`material-symbols-outlined text-3xl ${
-                    item.color === 'blue' ? 'text-blue-600 dark:text-blue-500' : 
-                    item.color === 'emerald' ? 'text-emerald-600 dark:text-emerald-500' : 'text-orange-600 dark:text-orange-500'
-                  }`}>{item.icon}</span>
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-900 dark:text-white">{item.title}</h3>
-                <p className="text-slate-500 text-sm leading-relaxed">{item.desc}</p>
+          {/* About Overview Section */}
+          <section className="py-16 grid grid-cols-1 lg:grid-cols-2 gap-16 items-start border-b border-slate-200 dark:border-slate-800 pb-20">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-3">
+                <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight leading-tight">
+                  Bridging <span className="text-primary">Business Operations</span> with Data Science
+                </h2>
+                <div className="w-20 h-1.5 bg-primary rounded-full"></div>
               </div>
-            ))}
+              <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                Currently pursuing a <strong className="text-slate-900 dark:text-white">B.S. in Data Science</strong> at the prestigious <strong className="text-slate-900 dark:text-white">IIT Madras</strong>, I combine rigorous technical training with real-world experience in MIS and ERP management. 
+              </p>
+              <p className="text-slate-600 dark:text-slate-400 text-lg leading-relaxed">
+                My background allows me to not just analyze numbers, but to understand the underlying business processes in industries ranging from elevator installations to diamond manufacturing.
+              </p>
+              <div className="pt-4">
+                <Link to="/about" className="inline-flex items-center gap-2 text-primary font-black uppercase tracking-widest text-sm hover:translate-x-1 transition-transform group">
+                  My Journey & Experience
+                  <span className="material-symbols-outlined text-lg transition-transform group-hover:translate-x-1">arrow_forward</span>
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              <div className="bg-white dark:bg-[#1a2230] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex gap-5 group hover:border-primary transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-blue-100/50 dark:bg-blue-600/10 flex items-center justify-center shrink-0 border border-blue-200 dark:border-blue-500/20">
+                  <span className="material-symbols-outlined text-primary">school</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Top Tier Education</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">{education[0].degree} at {education[0].institution}.</p>
+                </div>
+              </div>
+              
+              <div className="bg-white dark:bg-[#1a2230] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex gap-5 group hover:border-primary transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-emerald-100/50 dark:bg-emerald-600/10 flex items-center justify-center shrink-0 border border-emerald-200 dark:border-emerald-500/20">
+                  <span className="material-symbols-outlined text-emerald-600 dark:text-emerald-500">terminal</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Automation Specialist</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">Optimizing workflows using Python and Advanced Excel at {experience[0].company}.</p>
+                </div>
+              </div>
+
+              <div className="bg-white dark:bg-[#1a2230] p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm flex gap-5 group hover:border-primary transition-colors">
+                <div className="w-12 h-12 rounded-xl bg-orange-100/50 dark:bg-orange-600/10 flex items-center justify-center shrink-0 border border-orange-200 dark:border-orange-500/20">
+                  <span className="material-symbols-outlined text-orange-600 dark:text-orange-500">verified</span>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-1">Certified Professional</h4>
+                  <p className="text-sm text-slate-500 leading-relaxed">Google & IBM Certified Data Analyst specializing in complex business reporting.</p>
+                </div>
+              </div>
+            </div>
           </section>
 
+          {/* Expertise Section */}
+          <section className="py-20 flex flex-col gap-10">
+            <div className="flex flex-col gap-3 text-center md:text-left">
+              <h2 className="text-slate-900 dark:text-white text-3xl md:text-4xl font-black tracking-tight">Strategic Expertise</h2>
+              <p className="text-slate-500 text-sm max-w-2xl">Specialized skill sets tailored for data-driven decision making, automation, and industrial business intelligence.</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {expertise.map((item, idx) => (
+                <div key={idx} className="bg-white dark:bg-[#1a2230] rounded-2xl p-10 border border-slate-200 dark:border-slate-800 flex flex-col items-center text-center group hover:border-primary transition-all shadow-sm dark:shadow-none">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 transition-transform group-hover:scale-110 shadow-sm ${
+                    item.color === 'blue' ? 'bg-blue-100/50 dark:bg-blue-600/10 border border-blue-200 dark:border-blue-500/20' : 
+                    item.color === 'emerald' ? 'bg-emerald-100/50 dark:bg-emerald-600/10 border border-emerald-200 dark:border-emerald-500/20' : 'bg-orange-100/50 dark:bg-orange-600/10 border border-orange-200 dark:border-orange-500/20'
+                  }`}>
+                    <span className={`material-symbols-outlined text-4xl ${
+                      item.color === 'blue' ? 'text-blue-600 dark:text-blue-500' : 
+                      item.color === 'emerald' ? 'text-emerald-600 dark:text-emerald-500' : 'text-orange-600 dark:text-orange-500'
+                    }`}>{item.icon}</span>
+                  </div>
+                  <h3 className="text-2xl font-black mb-4 text-slate-900 dark:text-white tracking-tight">{item.title}</h3>
+                  <p className="text-slate-500 text-base leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Featured Projects Section */}
           <section className="flex flex-col gap-8 py-16">
             <div className="flex justify-between items-end">
               <div className="flex flex-col gap-2">
@@ -147,6 +213,7 @@ const HomePage: React.FC = () => {
             </div>
           </section>
 
+          {/* Contact CTA Section */}
           <section className="py-20">
             <div className="rounded-[2.5rem] bg-slate-50 dark:bg-[#1a2230] border border-slate-200 dark:border-slate-800/50 p-12 md:p-16 text-center shadow-inner relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-2xl group-hover:bg-primary/20 transition-colors"></div>
