@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { PROJECTS } from '../constants';
+import { PROJECTS } from '../services/constants';
 
 const ProjectDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -1,5 +1,5 @@
 
-import { Project, Skill } from './types';
+import { Project, Skill } from '../types';
 
 export const PROJECTS: Project[] = [
   {

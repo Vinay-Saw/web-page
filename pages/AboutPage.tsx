@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { SKILLS } from '../constants';
+import { SKILLS } from '../services/constants';
 
 const AboutPage: React.FC = () => {
   return (

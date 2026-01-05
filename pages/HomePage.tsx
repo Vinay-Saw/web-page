@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { PROJECTS } from '../constants';
+import { PROJECTS } from '../services/constants';
 
 const HomePage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PROJECTS } from '../constants';
+import { PROJECTS } from '../services/constants';
 
 const ProjectsPage: React.FC = () => {
   const [filter, setFilter] = useState('All');
