@@ -94,14 +94,12 @@ const ProjectDetailPage: React.FC = () => {
             <span className="w-1.5 h-8 bg-primary rounded-full mr-3"></span> Analytical Approach
           </h2>
           <div className="space-y-4">
-             <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border dark:border-border-dark">
-                <h4 className="font-bold mb-2">1. Data Preparation & Cleaning</h4>
-                <p>Standardized inconsistent ERP data entries and structured large datasets for streamlined reporting. Utilized Advanced Excel for outlier detection and missing value imputation.</p>
-             </div>
-             <div className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border dark:border-border-dark">
-                <h4 className="font-bold mb-2">2. Business Logic Integration</h4>
-                <p>Collaborated with stakeholders to define key performance indicators (KPIs) and translated complex business requirements into automated MIS templates.</p>
-             </div>
+             {project.approach.map((step, idx) => (
+               <div key={idx} className="p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border dark:border-border-dark">
+                  <h4 className="font-bold mb-2">{idx + 1}. {step.title}</h4>
+                  <p>{step.content}</p>
+               </div>
+             ))}
           </div>
         </section>
 

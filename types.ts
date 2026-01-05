@@ -6,6 +6,7 @@ export interface Project {
   image: string;
   desc: string;
   longDesc: string;
+  approach: { title: string; content: string }[];
   tags: string[];
   metrics: {
     label: string;

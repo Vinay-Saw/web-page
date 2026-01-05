@@ -112,6 +112,20 @@ export const portfolio = {
       "image": "https://images.unsplash.com/photo-1551033406-611cf9a28f67?auto=format&fit=crop&q=80&w=800",
       "desc": "Streamlined day-to-day operations for a lab-grown diamond manufacturer using advanced Excel automation.",
       "longDesc": "At Pure Cultured Diamonds LLP, I managed extensive datasets in the diamond industry. I developed automated Excel templates utilizing VLOOKUP, pivot tables, and conditional formatting to reduce workforce requirements and create meaningful reports for international sales teams.",
+      "approach": [
+        {
+          "title": "Data Consolidation",
+          "content": "Aggregated fragmented memo records and vendor data into a centralized Excel ecosystem using Power Query."
+        },
+        {
+          "title": "Automation Engine",
+          "content": "Built dynamic templates using VLOOKUP and Index-Match to automate stock ageing tracking and inventory movement."
+        },
+        {
+          "title": "Reporting Layer",
+          "content": "Developed visualized dashboards that identified high-holding inventory, enabling the team to reduce inventory turnaround time by 15%."
+        }
+      ],
       "tags": ["Excel", "MIS", "Data Analysis"],
       "tech": ["Advanced Excel", "VLOOKUP", "Pivot Tables", "ERP Software"],
       "metrics": [
@@ -127,6 +141,20 @@ export const portfolio = {
       "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
       "desc": "Weekly and monthly sales performance reporting for Fujitec Express Limited to drive revenue growth.",
       "longDesc": "Managed customer records and tracked performance metrics for an elevator installation specialist. By providing weekly and monthly data-driven recommendations, I supported the sales team in prioritizing tasks and allocating resources efficiently.",
+      "approach": [
+        {
+          "title": "KPI Definition",
+          "content": "Collaborated with operations heads to identify core metrics like 'Lead-to-Installation' time and 'Contract Value' per region."
+        },
+        {
+          "title": "ETL Pipeline",
+          "content": "Extracted raw ERP data, performed rigorous cleaning to remove duplicates, and mapped sales activities to specific timelines."
+        },
+        {
+          "title": "Insight Generation",
+          "content": "Published monthly performance reports that pinpointed underperforming regions, leading to a more strategic resource allocation for sales executives."
+        }
+      ],
       "tags": ["Sales Analysis", "ERP", "Reporting"],
       "tech": ["ERP Software", "Excel", "Data Visualization"],
       "metrics": [
@@ -142,6 +170,20 @@ export const portfolio = {
       "image": "https://images.unsplash.com/photo-1551288049-bbda38a5f452?auto=format&fit=crop&q=80&w=800",
       "desc": "Developed a machine learning model to predict customer churn with 85% accuracy.",
       "longDesc": "Using Python and Scikit-learn, I analyzed historical customer behavior to identify key indicators of churn. The project involved data cleaning, feature engineering, and evaluating various classification models like Random Forest and Logistic Regression.",
+      "approach": [
+        {
+          "title": "EDA & Cleaning",
+          "content": "Performed Exploratory Data Analysis to identify missing data patterns and correlations between 'Days Since Last Activity' and churn status."
+        },
+        {
+          "title": "Feature Engineering",
+          "content": "Created advanced features such as 'Engagement Scores' and 'Spending Trends' to improve model predictive power."
+        },
+        {
+          "title": "Model Evaluation",
+          "content": "Tested multiple algorithms including SVM and Random Forest, settling on Random Forest for its superior handling of non-linear relationships and high accuracy (85%)."
+        }
+      ],
       "tags": ["Machine Learning", "Python", "Predictive Modeling"],
       "tech": ["Python", "Pandas", "Scikit-learn", "Matplotlib"],
       "metrics": [
@@ -157,6 +199,20 @@ export const portfolio = {
       "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
       "desc": "Built a Generative AI tool to automate SEO-optimized content generation for marketing teams.",
       "longDesc": "Leveraged Gemini 3 Flash and prompt engineering to create a system that generates high-quality technical blog posts. I implemented a 'Chain of Thought' prompting strategy to ensure factual accuracy and a consistent brand voice.",
+      "approach": [
+        {
+          "title": "Prompt Engineering",
+          "content": "Designed specialized prompt templates using 'Chain of Thought' logic to force the LLM to verify facts before generating text."
+        },
+        {
+          "title": "API Integration",
+          "content": "Integrated the Gemini API with a Python backend to handle multi-turn conversations and context window management."
+        },
+        {
+          "title": "UX Workflow",
+          "content": "Developed a streamlined interface that allows marketing teams to input keywords and receive fully formatted, SEO-ready articles in seconds."
+        }
+      ],
       "tags": ["GenAI", "LLM", "Prompt Engineering"],
       "tech": ["Gemini API", "Python", "Streamlit", "Natural Language Processing"],
       "metrics": [
