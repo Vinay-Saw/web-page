@@ -11,7 +11,11 @@ const ProjectDetailPage: React.FC = () => {
   if (!project) return <Navigate to="/projects" />;
 
   useEffect(() => {
-    const sections = ['overview', 'methodology', 'share'];
+    const sections = ['overview', 'methodology', 'snippet', 'share'].filter(id => {
+      if (id === 'snippet' && !project.codeSnippet) return false;
+      return true;
+    });
+    
     const observerOptions = {
       root: null,
       rootMargin: '-10% 0px -80% 0px',
@@ -34,7 +38,7 @@ const ProjectDetailPage: React.FC = () => {
     });
 
     return () => observer.disconnect();
-  }, [id]);
+  }, [id, project.codeSnippet]);
 
   const shareUrl = window.location.href;
   const shareTitle = encodeURIComponent(`Check out Vinay Saw's data project: ${project.title}`);
@@ -78,6 +82,7 @@ const ProjectDetailPage: React.FC = () => {
             <nav className="space-y-1 border-l-2 border-slate-200 dark:border-slate-800">
               <NavLink target="overview" label="Overview" />
               <NavLink target="methodology" label="Approach" />
+              {project.codeSnippet && <NavLink target="snippet" label="Implementation" />}
               <NavLink target="share" label="Share Project" />
             </nav>
           </div>
@@ -159,6 +164,36 @@ const ProjectDetailPage: React.FC = () => {
              ))}
           </div>
         </section>
+
+        {project.codeSnippet && (
+          <section id="snippet" className="scroll-mt-28">
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white mb-6 flex items-center">
+              <span className="w-1.5 h-8 bg-primary rounded-full mr-3"></span> Technical Implementation
+            </h2>
+            <div className="rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 bg-slate-900 shadow-2xl">
+              <div className="bg-slate-800 px-4 py-2 flex items-center justify-between border-b border-slate-700">
+                <div className="flex gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                </div>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">python_implementation.py</span>
+                <button 
+                  onClick={() => {
+                    navigator.clipboard.writeText(project.codeSnippet || '');
+                    alert('Code copied!');
+                  }}
+                  className="text-slate-400 hover:text-white transition-colors"
+                >
+                  <span className="material-symbols-outlined text-sm">content_copy</span>
+                </button>
+              </div>
+              <pre className="p-6 overflow-x-auto font-mono text-sm leading-relaxed text-slate-300 bg-[#0d1117]">
+                <code>{project.codeSnippet}</code>
+              </pre>
+            </div>
+          </section>
+        )}
 
         <section id="share" className="pt-12 border-t border-slate-200 dark:border-slate-800 scroll-mt-28">
           <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-6">Share this Analysis</h3>

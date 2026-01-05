@@ -7,6 +7,7 @@ export interface Project {
   desc: string;
   longDesc: string;
   approach: { title: string; content: string }[];
+  codeSnippet?: string;
   tags: string[];
   metrics: {
     label: string;
