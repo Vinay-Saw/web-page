@@ -10,7 +10,7 @@
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://portfolio-gemini-three.vercel.app/" />
+    <meta property="og:url" content="https://vinaysaw.vercel.app/" />
     <meta property="og:title" content="Vinay Saw | Data Analyst Portfolio" />
     <meta property="og:description" content="Analytical insights from complex data. IIT Madras Data Science student." />
     <meta property="og:image" content="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200" />
@@ -27,8 +27,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
 
     <script>
-        // Polyfill process.env for the browser environment
-        window.process = window.process || { env: { API_KEY: "" } };
+        // Robust polyfill for process.env that preserves existing keys
+        window.process = window.process || { env: {} };
+        window.process.env = window.process.env || {};
     </script>
     <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
     <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -84,6 +85,54 @@
             border-radius: 0 !important;
             background: #0d1117 !important;
         }
+        /* Markdown rendering styles for the AI Consultant */
+        .markdown-content {
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: inherit;
+        }
+        .markdown-content p { margin-bottom: 0.8rem; }
+        .markdown-content p:last-child { margin-bottom: 0; }
+        
+        .markdown-content strong { 
+            font-weight: 800 !important; 
+            color: #2b6cee !important; 
+        }
+        .dark .markdown-content strong {
+            color: #60a5fa !important;
+            text-shadow: 0 0 10px rgba(96, 165, 250, 0.2);
+        }
+        
+        .markdown-content a { 
+            color: #2b6cee; 
+            text-decoration: underline; 
+            font-weight: 700; 
+            transition: all 0.2s;
+        }
+        .markdown-content a:hover { 
+            opacity: 0.8;
+            color: #1e4bb5;
+        }
+        
+        .markdown-content ul, .markdown-content ol { 
+            margin-left: 1.25rem; 
+            margin-bottom: 0.8rem; 
+            list-style-position: outside;
+        }
+        .markdown-content ul { list-style-type: disc; }
+        .markdown-content ol { list-style-type: decimal; }
+        .markdown-content li { margin-bottom: 0.35rem; padding-left: 0.25rem; }
+        
+        .markdown-content code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0,0,0,0.06);
+            padding: 0.15em 0.3em;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .dark .markdown-content code {
+            background: rgba(255,255,255,0.1);
+        }
     </style>
 <script type="importmap">
 {
@@ -92,7 +141,8 @@
     "react": "https://esm.sh/react@^19.2.3",
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0"
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "react-markdown": "https://esm.sh/react-markdown@^9.0.1"
   }
 }
 </script>

@@ -48,10 +48,12 @@ const HomePage: React.FC = () => {
                 </button>
                 <a 
                   href={profile.links.resume}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex cursor-pointer items-center justify-center rounded-lg h-12 px-6 bg-white dark:bg-transparent border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-all text-sm font-bold shadow-sm dark:shadow-none min-w-[160px] active:scale-95"
                 >
                   Resume
-                  <span className="material-symbols-outlined ml-2 text-lg">download</span>
+                  <span className="material-symbols-outlined ml-2 text-lg">open_in_new</span>
                 </a>
               </div>
             </div>

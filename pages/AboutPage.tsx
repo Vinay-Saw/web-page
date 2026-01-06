@@ -51,10 +51,15 @@ const AboutPage: React.FC = () => {
               </h2>
             </div>
             <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4">
-              <button className="flex cursor-pointer items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 text-white font-bold transition-all shadow-lg">
+              <a 
+                href={profile.links.resumeDownload}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex cursor-pointer items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 text-white font-bold transition-all shadow-lg"
+              >
                 <span className="material-symbols-outlined text-[20px]">download</span>
                 <span className="truncate">Download Resume</span>
-              </button>
+              </a>
             </div>
           </div>
         </div>
