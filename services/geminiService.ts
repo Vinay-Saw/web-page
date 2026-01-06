@@ -3,106 +3,108 @@ import { GoogleGenAI } from "@google/genai";
 import { portfolio } from "../data/portfolio";
 
 /**
- * Interface with Vinay's custom Gemini Consultant
- * Optimized to use the full portfolio data as a pre-parsed resume.
+ * Fetches the resume PDF and converts it to a base64 string for the Gemini API.
+ * Uses the proxy-free direct download link.
+ */
+async function fetchResumeAsBase64(url: string): Promise<string | null> {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error('Failed to fetch resume');
+    const blob = await response.blob();
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result as string;
+        const base64String = result.split(',')[1];
+        resolve(base64String);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  } catch (error) {
+    console.warn("Could not fetch PDF for AI analysis. Falling back to structured web content.", error);
+    return null;
+  }
+}
+
+/**
+ * Interface with Vinay's custom Gemini Consultant.
+ * The model receives both the structured web content and the actual PDF document.
  */
 export const getAIResponse = async (userMessage: string) => {
   try {
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-    const { profile, projects, experience, education, certifications, skills, references } = portfolio;
+    const { profile, experience, projects, education, certifications, skills } = portfolio;
 
-    // 1. Detailed Project Knowledge Base
-    const projectContext = projects.map(p => {
-      const metrics = p.metrics.map(m => `${m.label}: ${m.value}`).join(", ");
-      const techStack = p.tech.join(", ");
-      return `[PROJECT] ${p.title}
-Role: Data Analyst
-Summary: ${p.desc}
-Full Details: ${p.longDesc}
-Technology: ${techStack}
-Business Impact: ${metrics}
----`;
-    }).join("\n");
-
-    // 2. Career History Context
-    const experienceContext = experience.map(exp => 
-      `[WORK] ${exp.title} at ${exp.company} (${exp.period}):
-Key Impact:
-${exp.points.map(pt => `- ${pt}`).join("\n")}`
-    ).join("\n\n");
-
-    // 3. Educational & Certification Credentials
-    const educationContext = education.map(edu => 
-      `- ${edu.degree} from ${edu.institution} (${edu.period})`
-    ).join("\n");
-
-    const certificationsContext = certifications.map(c => 
-      `- ${c.name} (${c.date})`
-    ).join("\n");
-
-    // 4. References & HR Contacts
-    const referencesContext = references?.map(r => 
-      `- ${r.name} (${r.role}) at ${r.company}. Relation: ${r.relation}`
-    ).join("\n") || "No explicit references listed in summary.";
+    // Build a structured "Web Content" summary for the AI
+    const webContentContext = `
+      [WEB PROFILE]
+      Name: ${profile.name}
+      Role: ${profile.role}
+      Tagline: ${profile.tagline}
+      Location: ${profile.location}
+      Availability: ${profile.relocationInfo}
+      
+      [WEB EXPERIENCE SUMMARY]
+      ${experience.map(e => `- ${e.title} at ${e.company} (${e.period}): ${e.points.join(". ")}`).join("\n")}
+      
+      [WEB PROJECTS]
+      ${projects.map(p => `- ${p.title}: ${p.desc} (Tech: ${p.tech.join(", ")})`).join("\n")}
+      
+      [WEB EDUCATION]
+      ${education.map(ed => `- ${ed.degree} from ${ed.institution}`).join("\n")}
+      
+      [WEB SKILLS]
+      ${skills.map(s => `${s.name} (${s.level}%)`).join(", ")}
+    `;
 
     const systemInstruction = `
-      You are "Vinay's AI Resume Assistant". You have "parsed" Vinay Saw's official resume and portfolio.
+      You are "Vinay's AI Portfolio Assistant", an expert consultant representing Vinay Saw.
       
-      ABOUT VINAY SAW:
-      Full Name: ${profile.name}
-      Current Role: ${profile.role}
-      Tagline: "${profile.tagline}"
-      Location: ${profile.location}
-      Relocation Status: ${profile.relocationInfo}
-      Phone: ${profile.phone}
-      Email: ${profile.email}
+      SOURCES OF TRUTH:
+      1. ATTACHED PDF: This is Vinay's official full-length resume. Use it for specific names, dates, contact details, and give first priority to it.
+      2. WEB CONTENT: This is the structured data from his live portfolio website provided below.
       
-      OFFICIAL RESUME DOCUMENT:
-      Direct Link: ${profile.links.resume}
+      INSTRUCTIONS:
+      - Always cross-reference both sources. If a specific person or role is mentioned that isn't in the Web Content, search the ATTACHED PDF thoroughly.
+      - If asked "Is he mentioned anywhere 'Name'?", search the PDF binary specifically.
+      - Formatting: Always use Markdown. Use **bold** for emphasis, lists for multiple items, and [links](url) for resources.
+      - Tone: Professional, helpful, and concise.
+      - If asked for a resume download, provide: ${profile.links.resume}
       
-      CORE WORK EXPERIENCE (PARSED FROM RESUME):
-      ${experienceContext}
-      
-      ACADEMIC BACKGROUND:
-      ${educationContext}
-      
-      PROFESSIONAL CERTIFICATIONS:
-      ${certificationsContext}
-
-      REFERENCES & HR CONTACTS:
-      ${referencesContext}
-      
-      TECHNICAL SKILLS MATRIX:
-      ${skills.map(s => `${s.name} (${s.level}%)`).join(", ")}
-      
-      PROJECT PORTFOLIO (DETAILED):
-      ${projectContext}
-
-      RESPONSE BEHAVIOR:
-      1. Read ${profile.links.resume} before answering the questions.
-      2. You are Vinay's direct representative. Be professional, confident, and analytical.
-      3. If asked for a resume, CV, or document, PROVIDE THIS LINK IMMEDIATELY: ${profile.links.resume}.
-      4. Focus on his specialization in MIS (Management Information Systems), Operations, Advanced Excel, Python, SQL, and Power BI, and his current B.S. in Data Science at IIT Madras.
-      5. If a recruiter asks about relocation, confirm he is ready to move within India or work remotely.
-      6. Use Markdown formatting for your responses (bolding, lists, links, etc).
-      7. Keep responses concise and formatted for readability.
-      8. If asked about hiring or contact, provide his email: ${profile.email}.
-      9. NEVER invent information not found in the parsed data above.
+      STRUCTURED WEB CONTENT:
+      ${webContentContext}
     `;
+
+    // Fetch PDF Binary from the resume link
+    const pdfBase64 = await fetchResumeAsBase64(profile.links.resumeDownload);
+
+    const parts: any[] = [{ text: userMessage }];
+    
+    // Attach PDF if successfully fetched
+    if (pdfBase64) {
+      parts.unshift({
+        inlineData: {
+          mimeType: 'application/pdf',
+          data: pdfBase64
+        }
+      });
+    }
 
     const response = await ai.models.generateContent({
       model: 'gemini-3-flash-preview',
-      contents: [{ parts: [{ text: userMessage }] }],
+      contents: [{ parts }],
       config: {
         systemInstruction,
-        temperature: 0.15, // Lower temperature for even higher factual stability
+        temperature: 0.15,
         topP: 0.8,
       },
     });
 
-    return response.text?.trim() || "I'm having trouble retrieving that specific detail. You can find more in Vinay's resume here: " + profile.links.resume;
+    const resultText = response.text?.trim();
+    return resultText || "I've analyzed Vinay's profile, but I couldn't find that specific detail. You can view his full resume here: " + profile.links.resume;
   } catch (error) {
     console.error("Gemini AI Service Error:", error);
-    return "I apologize, but I'm having a connection issue. Please contact Vinay directly at vinaysaw@duck.com.";
+    return "I'm having a technical difficulty reading Vinay's full documents. You can contact him directly at vinaysaw@duck.com or view his resume manually here: " + portfolio.profile.links.resume;
   }
 };

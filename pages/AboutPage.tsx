@@ -52,7 +52,7 @@ const AboutPage: React.FC = () => {
             </div>
             <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4">
               <a 
-                href={profile.links.resume}
+                href={profile.links.resumeDownload}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex cursor-pointer items-center justify-center gap-2 rounded-lg h-12 px-6 bg-primary hover:bg-blue-600 text-white font-bold transition-all shadow-lg"

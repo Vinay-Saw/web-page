@@ -16,7 +16,8 @@ export const portfolio = {
     "links": {
       "linkedin": "https://linkedin.com/in/vinaysaw",
       "github": "https://github.com/vinay-saw",
-      "resume": "https://drive.google.com/file/d/1MQlAS2Lbnh8xHV5fWBOT708_Faf3iX6K/view?usp=drivesdk"
+      "resume": "https://drive.google.com/file/d/1MQlAS2Lbnh8xHV5fWBOT708_Faf3iX6K/view?usp=drivesdk",
+      "resumeDownload" : "https://drive.usercontent.google.com/u/1/uc?id=1MQlAS2Lbnh8xHV5fWBOT708_Faf3iX6K&export=download"
     }
   },
   "education": [
@@ -41,7 +42,8 @@ export const portfolio = {
         "Specializes in elevator installation and maintenance reporting.",
         "Generate weekly and monthly sales performance reports for strategic planning.",
         "Manage detailed records of sales and customer information in ERP software.",
-        "Prioritize tasks and allocate resources to increase productivity and revenue."
+        "Prioritize tasks and allocate resources to increase productivity and revenue.",
+        "Work closely with HR and Operations teams for workforce planning."
       ]
     },
     {
@@ -82,14 +84,7 @@ export const portfolio = {
     { "value": "IIT M", "label": "B.S. Program" },
     { "value": "5+", "label": "Projects" }
   ],
-  "references": [
-    {
-      "name": "Rajesh Sir",
-      "role": "HR Manager / Senior HR Executive",
-      "company": "Pure Cultured Diamonds LLP",
-      "relation": "Professional Contact / Hiring Authority"
-    }
-  ],
+  "references": [],
   "certifications": [
     { 
       "name": "Google Data Analytics Professional Certificate", 
@@ -157,7 +152,7 @@ export const portfolio = {
       "id": "2",
       "title": "Sales Performance Analytics",
       "categories": ["Analytics"],
-      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200",
       "desc": "Weekly and monthly sales performance reporting for Fujitec Express Limited to drive revenue growth.",
       "longDesc": "Managed customer records and tracked performance metrics for an elevator installation specialist. By providing weekly and monthly data-driven recommendations, I supported the sales team in prioritizing tasks and allocating resources efficiently.",
       "fullReportUrl": "https://docs.google.com/document/d/2-example-report",
