@@ -61,10 +61,10 @@ const HomePage: React.FC = () => {
             <div className="w-full md:w-[45%] flex justify-center md:justify-end mt-12 md:mt-0">
               <div className="relative w-full aspect-[4/5] max-w-[380px] rounded-2xl overflow-hidden shadow-2xl border border-slate-200 dark:border-white/5 bg-slate-100 dark:bg-slate-800">
                 <img 
-                  src="https://drive.google.com/uc?export=view&id=1q44jcvuL4z5lbQqh0ut8seWZ8pNL20yt"
+                  src="https://lh3.googleusercontent.com/d/1q44jcvuL4z5lbQqh0ut8seWZ8pNL20yt"
                   alt="Vinay Saw - Professional Portrait"
                   loading="eager"
-                  className="w-full h-full object-cover grayscale-[0.2] dark:grayscale-[0.4]"
+                  className="w-full h-full object-cover grayscale-[0.1] dark:grayscale-[0.2]"
                 />
                 <div className="absolute bottom-4 left-4 right-4 p-4 bg-white/90 dark:bg-slate-900/80 backdrop-blur-md rounded-xl border border-slate-200 dark:border-white/10 shadow-lg">
                   <div className="flex items-center gap-3">
